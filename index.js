@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const questions = require('./lib/questions');
-const createShapeObject = require('./lib/svg_generator');
+const createShapeObject = require('./lib/shapes');
 const fs = require('fs');
 
 console.log("Welcome to the Vector Graphics File Forge!");
@@ -16,37 +16,34 @@ inquirer
     console.log("shape object----------");
     console.log()
 
-    try {
+    
       const shapeObject = createShapeObject(answers);
       const svgString = shapeObject.getSVG();
     
-      fs.writeFile("./examples/example_svg.svg", svgString, (err) => {
-        if (err) throw err;
-        console.log("SVG file created successfully!");
-      });
-    } catch (error) {
-      console.error(error.message);
+      // fs.writeFile("./examples/example_svg.svg", svgString, (err) => {
+      //   if (err) throw err;
+      //   console.log("SVG file created successfully!");
+      // })
+  
+
+    fs.writeFile('./examples/logo.svg', svgString, err => {
+      if (err) {
+        console.log('-----------------------');
+        console.log(err);
+        console.log("Didn't happen");
+    } else {
+        console.log('-----------------------');
+        console.log('Generated logo.svg');
     }
+    });
 
-  //   fs.writeFile('./examples/example_svg.svg', createShapeObject(answers), err => {
-  //     if (err) {
-  //       console.log('-----------------------');
-  //       console.log(err);
-  //       console.log("Didn't happen");
-  //   } else {
-  //       console.log('-----------------------');
-  //       console.log('File has been successfully written');
-  //   }
-  //   });
-
-  //   // console.log(answers);
-  // })
-  // .catch((error) => {
-  //   if (error.isTtyError) {
-  //     // Prompt couldn't be rendered in the current environment
-  //   } else {
-  //     // Something else went wrong
-  //   }
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log("Prompt couldn't be rendered in the current environment");
+    } else {
+      console.log("Something else went wrong");
+    }
   }
 );
 
