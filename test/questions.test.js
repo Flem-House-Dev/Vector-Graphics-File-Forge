@@ -17,22 +17,33 @@ describe('shapes', () => {
     })
 
     describe('textColor', () => {
-        const validateColor = questions[1].validate;
+        const validateTextColor = questions[1].validate;
         // it should allow color names and hexcodes
         // it should throw an error if input is an empty string
         // it should throw an error if input is not a valid color name or hex code
         it('should allow a valid color name to pass', () => {
-            expect(validateColor('blue')).toBe(true);
+            expect(validateTextColor('blue')).toBe(true);
         })
-        it('should not allow an invalid color to pass', () => {
-            expect(validateColor('corndog')).toBe(globalErrMsgs.colorErr);
+        it('should allow a hex code value to pass', () => {
+            expect(validateTextColor('#00ff00')).toBe(true);
         })
+        it('should not allow an invalid color name to pass', () => {
+            expect(validateTextColor('corndog')).toBe(globalErrMsgs.colorErr);
+        })
+
     })
 
-    // describe('shapeColor', () => {
-    //     // it should allow color names and hexcodes
-    //     // it should throw an error if input is an empty string
-    //     // it should throw an error if input is not a valid color name or hex code
-    // })
+    describe('shapeColor', () => {
+        const validateShapeColor = questions[3].validate;
+        it('should allow a valid color name to pass', () => {
+            expect(validateShapeColor('blue')).toBe(true);
+        })
+        it('should allow a hex code value to pass', () => {
+            expect(validateShapeColor('#00ff00')).toBe(true);
+        })
+        it('should not allow an invalid color name to pass', () => {
+            expect(validateShapeColor('corndog')).toBe(globalErrMsgs.colorErr);
+        })
+    })
 
 })
