@@ -1,5 +1,5 @@
-const inquirer = require('inquirer');
-const {questions, globalErrMsgs} = require("../lib/questions.js");
+const questions = require("../lib/questions.js");
+const globalErrMsgs = require('../lib/globalErrorMsgs.js');
 
 describe('shapes', () => {
     describe('text', () => {
@@ -18,9 +18,6 @@ describe('shapes', () => {
 
     describe('textColor', () => {
         const validateTextColor = questions[1].validate;
-        // it should allow color names and hexcodes
-        // it should throw an error if input is an empty string
-        // it should throw an error if input is not a valid color name or hex code
         it('should allow a valid color name to pass', () => {
             expect(validateTextColor('blue')).toBe(true);
         })
@@ -45,5 +42,4 @@ describe('shapes', () => {
             expect(validateShapeColor('corndog')).toBe(globalErrMsgs.colorErr);
         })
     })
-
 })
